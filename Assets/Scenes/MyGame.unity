@@ -750,12 +750,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3562b68cff984e7468dae3fe4b836fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  armBody: {fileID: 0}
-  torque: 5
-  left: 25
-  right: 26
-  up: 23
-  down: 7
+  joint: {fileID: 0}
+  upKey: 37
+  downKey: 33
+  leftKey: 15
+  rightKey: 18
+  rotationSpeed: 90
+  maxAngle: 45
+  spring: 1000
+  damper: 100
+  maxForce: 10000
 --- !u!153 &1737481350
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -828,7 +832,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   m_TargetAngularVelocity: {x: 0, y: 0, z: 0}
-  m_RotationDriveMode: 0
+  m_RotationDriveMode: 1
   m_AngularXDrive:
     serializedVersion: 4
     positionSpring: 0
