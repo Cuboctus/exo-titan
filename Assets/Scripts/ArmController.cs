@@ -30,10 +30,10 @@ public class ArmController : MonoBehaviour
         if (keyboard == null)
             return;
 
-        if (keyboard[left].isPressed) input.x -= 1f;
-        if (keyboard[right].isPressed) input.x += 1f;
-        if (keyboard[down].isPressed) input.y -= 1f;
-        if (keyboard[up].isPressed) input.y += 1f;
+        if (keyboard[left].isPressed) input.z -= 1f;
+        if (keyboard[right].isPressed) input.z += 1f;
+        if (keyboard[down].isPressed) input.x -= 1f;
+        if (keyboard[up].isPressed) input.x += 1f;
     }
 
     private void FixedUpdate()

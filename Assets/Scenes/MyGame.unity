@@ -384,7 +384,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &961739749
 GameObject:
@@ -517,7 +517,7 @@ Transform:
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.953717, z: -0.30070576, w: 0}
-  m_LocalPosition: {x: 0, y: 4, z: 8}
+  m_LocalPosition: {x: -0.92, y: 3.77, z: 5.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -731,13 +731,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1737481347}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -1.5, y: 0, z: 0}
+  m_LocalRotation: {x: -0.49999976, y: 0.49999976, z: 0.5000003, w: 0.5000003}
+  m_LocalPosition: {x: -1.5, y: 0, z: -0.0000000034586844}
   m_LocalScale: {x: 0.1, y: 1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1641021795}
-  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
 --- !u!114 &1737481349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,8 +774,8 @@ ConfigurableJoint:
   m_XMotion: 0
   m_YMotion: 0
   m_ZMotion: 0
-  m_AngularXMotion: 0
-  m_AngularYMotion: 1
+  m_AngularXMotion: 1
+  m_AngularYMotion: 0
   m_AngularZMotion: 1
   m_LinearLimitSpring:
     spring: 0
@@ -867,7 +867,7 @@ Rigidbody:
   m_GameObject: {fileID: 1737481347}
   serializedVersion: 5
   m_Mass: 0.1
-  m_LinearDamping: 3
+  m_LinearDamping: 10
   m_AngularDamping: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
