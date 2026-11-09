@@ -472,6 +472,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+<<<<<<< HEAD
+=======
 --- !u!1 &307821656
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,6 +587,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2051448686}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+>>>>>>> ymparisto
 --- !u!1 &394470523
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,7 +726,11 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
+<<<<<<< HEAD
+  m_Constraints: 126
+=======
   m_Constraints: 0
+>>>>>>> ymparisto
   m_CollisionDetection: 0
 --- !u!1 &961739749
 GameObject:
@@ -856,7 +863,11 @@ Transform:
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.953717, z: -0.30070576, w: 0}
+<<<<<<< HEAD
+  m_LocalPosition: {x: -0.92, y: 3.77, z: 5.41}
+=======
   m_LocalPosition: {x: 0, y: 4, z: 8}
+>>>>>>> ymparisto
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -968,6 +979,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129010460}
   serializedVersion: 2
+<<<<<<< HEAD
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 1, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+=======
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -23.9, y: 0, z: 0.41769}
   m_LocalScale: {x: 7.2552357, y: 1, z: 2}
@@ -1451,6 +1469,7 @@ Transform:
   - {fileID: 307821660}
   - {fileID: 174100828}
   - {fileID: 1129010464}
+>>>>>>> ymparisto
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1606776780
@@ -1788,5 +1807,9 @@ SceneRoots:
   m_Roots:
   - {fileID: 961739753}
   - {fileID: 203844589}
+<<<<<<< HEAD
+  - {fileID: 1129010464}
+=======
   - {fileID: 2051448686}
+>>>>>>> ymparisto
   - {fileID: 1606776781}
