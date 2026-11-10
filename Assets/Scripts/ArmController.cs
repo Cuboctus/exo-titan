@@ -1,105 +1,147 @@
-using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine;
 
-[RequireComponent(typeof(ConfigurableJoint))]
-public class ArmController : MonoBehaviour
+public class RagdollController : MonoBehaviour
 {
-    [Header("Joint")]
-    [SerializeField] private ConfigurableJoint joint;
+    [System.Serializable]
+    public class Limb
+    {
+        [Header("Joint")]
+        public ConfigurableJoint joint;
 
-    [Header("Controls")]
-    [SerializeField] private Key upKey = Key.W;
-    [SerializeField] private Key downKey = Key.S;
-    [SerializeField] private Key leftKey = Key.A;
-    [SerializeField] private Key rightKey = Key.D;
+        [Header("Controls")]
+        public Key xPositive;
+        public Key xNegative;
+        public Key zPositive;
+        public Key zNegative;
 
-    [Header("Movement")]
-    [SerializeField] private float rotationSpeed = 90f;
-    [SerializeField] private float maxAngle = 45f;
+        [Header("Settings")]
+        public float rotationSpeed = 90f;
+        public float maxAngle = 90f;
 
-    [Header("Drive")]
-    [SerializeField] private float spring = 1000f;
-    [SerializeField] private float damper = 100f;
-    [SerializeField] private float maxForce = 10000f;
+        [HideInInspector]
+        public Vector3 targetEuler;
 
-    private Quaternion startLocalRotation;
-    private float targetX;
-    private float targetY;
+        [HideInInspector]
+        public Quaternion startLocalRotation;
+    }
+
+    [Header("Limbs")]
+    public Limb leftArm;
+    public Limb rightArm;
+    public Limb leftLeg;
+    public Limb rightLeg;
+
+    [Header("Joint Drive")]
+    public float spring = 500f;
+    public float damper = 50f;
+    public float maxForce = 1000f;
+
+    private Limb[] limbs;
 
     private void Awake()
     {
-        if (joint == null)
-            joint = GetComponent<ConfigurableJoint>();
-
-        // Remember the arm's initial orientation.
-        startLocalRotation = transform.localRotation;
-
-        // Use a rotation drive instead of applying torque manually.
-        joint.rotationDriveMode = RotationDriveMode.Slerp;
-
-        joint.slerpDrive = new JointDrive
+        limbs = new Limb[]
         {
-            positionSpring = spring,
-            positionDamper = damper,
-            maximumForce = maxForce
+            leftArm,
+            rightArm,
+            leftLeg,
+            rightLeg
         };
 
-        // The arm may rotate, but its attachment point stays connected.
-        joint.xMotion = ConfigurableJointMotion.Locked;
-        joint.yMotion = ConfigurableJointMotion.Locked;
-        joint.zMotion = ConfigurableJointMotion.Locked;
+        foreach (Limb limb in limbs)
+        {
+            if (limb.joint == null)
+                continue;
 
-        joint.angularXMotion = ConfigurableJointMotion.Limited;
-        joint.angularYMotion = ConfigurableJointMotion.Limited;
-        joint.angularZMotion = ConfigurableJointMotion.Limited;
+            limb.startLocalRotation =
+                limb.joint.transform.localRotation;
+
+            limb.targetEuler = Vector3.zero;
+
+            limb.joint.rotationDriveMode =
+                RotationDriveMode.Slerp;
+
+            limb.joint.slerpDrive = new JointDrive
+            {
+                positionSpring = spring,
+                positionDamper = damper,
+                maximumForce = maxForce
+            };
+        }
     }
 
     private void Update()
     {
-        Keyboard keyboard = Keyboard.current;
+        foreach (Limb limb in limbs)
+        {
+            if (limb.joint == null)
+                continue;
 
-        if (keyboard == null)
-            return;
+            float x = 0f;
+            float z = 0f;
 
-        float horizontal = 0f;
-        float vertical = 0f;
+            if (Keyboard.current == null)
+                return;
 
-        if (keyboard[leftKey].isPressed) horizontal -= 1f;
-        if (keyboard[rightKey].isPressed) horizontal += 1f;
-        if (keyboard[downKey].isPressed) vertical -= 1f;
-        if (keyboard[upKey].isPressed) vertical += 1f;
+            if (Keyboard.current[limb.xPositive].isPressed)
+                x += 1f;
 
-        targetY += horizontal * rotationSpeed * Time.deltaTime;
-        targetX += vertical * rotationSpeed * Time.deltaTime;
+            if (Keyboard.current[limb.xNegative].isPressed)
+                x -= 1f;
 
-        targetX = Mathf.Clamp(targetX, -maxAngle, maxAngle);
-        targetY = Mathf.Clamp(targetY, -maxAngle, maxAngle);
+            if (Keyboard.current[limb.zPositive].isPressed)
+                z += 1f;
+
+            if (Keyboard.current[limb.zNegative].isPressed)
+                z -= 1f;
+
+            limb.targetEuler.x +=
+                x * limb.rotationSpeed * Time.deltaTime;
+
+            limb.targetEuler.z +=
+                z * limb.rotationSpeed * Time.deltaTime;
+
+            limb.targetEuler.x = Mathf.Clamp(
+                limb.targetEuler.x,
+                -limb.maxAngle,
+                limb.maxAngle
+            );
+
+            limb.targetEuler.z = Mathf.Clamp(
+                limb.targetEuler.z,
+                -limb.maxAngle,
+                limb.maxAngle
+            );
+        }
     }
 
     private void FixedUpdate()
     {
-        // Desired orientation relative to the arm's starting pose.
-        Quaternion desiredRotation =
-            startLocalRotation *
-            Quaternion.Euler(targetX, targetY, 0f);
+        foreach (Limb limb in limbs)
+        {
+            if (limb.joint == null)
+                continue;
 
-        SetTargetRotationLocal(desiredRotation, startLocalRotation);
+            ApplyRotation(limb);
+        }
     }
 
-    private void SetTargetRotationLocal(
-        Quaternion targetLocalRotation,
-        Quaternion initialLocalRotation)
+    private void ApplyRotation(Limb limb)
     {
-        Quaternion jointSpace =
-            Quaternion.LookRotation(joint.axis, joint.secondaryAxis);
+        Quaternion desiredLocalRotation =
+            limb.startLocalRotation *
+            Quaternion.Euler(limb.targetEuler);
 
-        Quaternion result = Quaternion.Inverse(jointSpace);
+        Quaternion jointSpace = Quaternion.LookRotation(
+            limb.joint.axis,
+            limb.joint.secondaryAxis
+        );
 
-        result *= Quaternion.Inverse(targetLocalRotation)
-                  * initialLocalRotation;
-
-        result *= jointSpace;
-
-        joint.targetRotation = result;
+        limb.joint.targetRotation =
+            Quaternion.Inverse(jointSpace) *
+            Quaternion.Inverse(desiredLocalRotation) *
+            limb.startLocalRotation *
+            jointSpace;
     }
 }

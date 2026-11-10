@@ -384,7 +384,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &961739749
 GameObject:
@@ -645,6 +645,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1606776781}
+  - component: {fileID: 1606776782}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -669,6 +670,61 @@ Transform:
   - {fileID: 1641021795}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1606776782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606776780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3562b68cff984e7468dae3fe4b836fda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RagdollController
+  leftArm:
+    joint: {fileID: 0}
+    xPositive: 0
+    xNegative: 0
+    zPositive: 0
+    zNegative: 0
+    rotationSpeed: 90
+    maxAngle: 90
+    targetEuler: {x: 0, y: 0, z: 0}
+    startLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+  rightArm:
+    joint: {fileID: 1737481350}
+    xPositive: 18
+    xNegative: 15
+    zPositive: 33
+    zNegative: 37
+    rotationSpeed: 120
+    maxAngle: 90
+    targetEuler: {x: 0, y: 0, z: 0}
+    startLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+  leftLeg:
+    joint: {fileID: 0}
+    xPositive: 0
+    xNegative: 0
+    zPositive: 0
+    zNegative: 0
+    rotationSpeed: 90
+    maxAngle: 90
+    targetEuler: {x: 0, y: 0, z: 0}
+    startLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+  rightLeg:
+    joint: {fileID: 0}
+    xPositive: 0
+    xNegative: 0
+    zPositive: 0
+    zNegative: 0
+    rotationSpeed: 90
+    maxAngle: 90
+    targetEuler: {x: 0, y: 0, z: 0}
+    startLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+  spring: 500
+  damper: 50
+  maxForce: 10000
 --- !u!1 &1641021794
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,7 +771,6 @@ GameObject:
   - component: {fileID: 1737481352}
   - component: {fileID: 1737481351}
   - component: {fileID: 1737481350}
-  - component: {fileID: 1737481349}
   m_Layer: 0
   m_Name: ArmRight
   m_TagString: Untagged
@@ -738,28 +793,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1641021795}
   m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
---- !u!114 &1737481349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1737481347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3562b68cff984e7468dae3fe4b836fda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  joint: {fileID: 0}
-  upKey: 37
-  downKey: 33
-  leftKey: 15
-  rightKey: 18
-  rotationSpeed: 90
-  maxAngle: 45
-  spring: 1000
-  damper: 100
-  maxForce: 10000
 --- !u!153 &1737481350
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -778,9 +811,9 @@ ConfigurableJoint:
   m_XMotion: 0
   m_YMotion: 0
   m_ZMotion: 0
-  m_AngularXMotion: 0
-  m_AngularYMotion: 1
-  m_AngularZMotion: 1
+  m_AngularXMotion: 2
+  m_AngularYMotion: 2
+  m_AngularZMotion: 2
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -884,7 +917,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
