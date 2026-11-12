@@ -57,7 +57,7 @@ public class RagdollController : MonoBehaviour
             limb.startLocalRotation =
                 limb.joint.transform.localRotation;
 
-            limb.targetEuler = Vector3.zero;
+            limb.targetEuler = new Vector3(0f, 0f, 25f);
 
             limb.joint.rotationDriveMode =
                 RotationDriveMode.Slerp;

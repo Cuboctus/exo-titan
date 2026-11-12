@@ -459,7 +459,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 16
   m_CollisionDetection: 0
 --- !u!1001 &871043433
 PrefabInstance:
@@ -829,40 +829,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RagdollController
   leftArm:
     joint: {fileID: 1837563595}
-    xPositive: 0
-    xNegative: 0
-    zPositive: 0
-    zNegative: 0
+    xPositive: 20
+    xNegative: 21
+    zPositive: 36
+    zNegative: 32
     rotationSpeed: 90
     maxAngle: 90
     targetEuler: {x: 0, y: 0, z: 0}
     startLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   rightArm:
     joint: {fileID: 1737481350}
-    xPositive: 18
-    xNegative: 15
-    zPositive: 33
-    zNegative: 37
+    xPositive: 24
+    xNegative: 22
+    zPositive: 27
+    zNegative: 35
     rotationSpeed: 120
     maxAngle: 90
     targetEuler: {x: 0, y: 0, z: 0}
     startLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   leftLeg:
     joint: {fileID: 1867886624}
-    xPositive: 0
-    xNegative: 0
-    zPositive: 0
-    zNegative: 0
+    xPositive: 18
+    xNegative: 33
+    zPositive: 17
+    zNegative: 19
     rotationSpeed: 90
     maxAngle: 90
     targetEuler: {x: 0, y: 0, z: 0}
     startLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   rightLeg:
     joint: {fileID: 254833202}
-    xPositive: 0
-    xNegative: 0
-    zPositive: 0
-    zNegative: 0
+    xPositive: 25
+    xNegative: 26
+    zPositive: 7
+    zNegative: 23
     rotationSpeed: 90
     maxAngle: 90
     targetEuler: {x: 0, y: 0, z: 0}
