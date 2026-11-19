@@ -9,11 +9,8 @@ public class RagdollController : MonoBehaviour
         [Header("Joint")]
         public ConfigurableJoint joint;
 
-        [Header("Controls")]
-        public Key xPositive;
-        public Key xNegative;
-        public Key zPositive;
-        public Key zNegative;
+        [Header("Control Manager")]
+        public string controlName;
 
         [Header("Settings")]
         public float rotationSpeed = 90f;
@@ -78,22 +75,30 @@ public class RagdollController : MonoBehaviour
             if (limb.joint == null)
                 continue;
 
+            if (ControlManager.Instance == null ||
+                Keyboard.current == null)
+                return;
+            Debug.Log("ControlManager found!");
+
+            ControlManager.LimbControls controls =
+                ControlManager.Instance.GetControls(limb.controlName);
+
+            if (controls == null)
+                continue;
+
             float x = 0f;
             float z = 0f;
 
-            if (Keyboard.current == null)
-                return;
-
-            if (Keyboard.current[limb.xPositive].isPressed)
+            if (Keyboard.current[controls.xPositive].isPressed)
                 x += 1f;
 
-            if (Keyboard.current[limb.xNegative].isPressed)
+            if (Keyboard.current[controls.xNegative].isPressed)
                 x -= 1f;
 
-            if (Keyboard.current[limb.zPositive].isPressed)
+            if (Keyboard.current[controls.zPositive].isPressed)
                 z += 1f;
 
-            if (Keyboard.current[limb.zNegative].isPressed)
+            if (Keyboard.current[controls.zNegative].isPressed)
                 z -= 1f;
 
             limb.targetEuler.x +=
